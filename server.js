@@ -51,21 +51,25 @@ app.post('/search', (req, res) => {
   console.log(url);
   superagent.get(url)
     .then(data => {
-    const title = data.body.items[0].volumeInfo.title;
-    const authors = data.body.items[0].volumeInfo.authors;
-    const description = data.body.items[0].volumeInfo.description;
-      res.send({title, authors, description});
-          
-      
-    });
+      // const title = data.body.items[0].volumeInfo.title;
+      // const authors = data.body.items[0].volumeInfo.authors;
+      // const description = data.body.items[0].volumeInfo.description;
+      const newBookList = getBookList(data.body.items);
+      res.send(newBookList);
+  })
+  .catch(error =>
+    console.log('something went wrong', error));
 });
+function getBookList(bookInfo){
+  return bookInfo.map (book => {
+    return new Book(book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.description)
+  });
 
-// const bookObj = {
-//   title: 'lord of the rings',
-//   author: 'oliver twist'
-// }
-//   books.push({
-//       =
-//   });
+}
+function Book(title, authors, description){
+  this.title = title,
+  this.authors = authors,
+  this.discription = description
+}
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
