@@ -1,8 +1,7 @@
 *{
   box-sizing: border-box;
-  margin: auto;
 }
 
 * {
-  background-image: linear-gradient(rgb(192, 166, 127),rgb(250, 219, 183), rgb(243, 198, 146));
+  background-image: linear-gradient(to right top, #c0a67f, #ceb38d, #ddc09b, #ebcda9, #fadbb7);
 }
