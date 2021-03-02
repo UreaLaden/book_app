@@ -12,11 +12,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 
-
-app.get('/hello', (req, res) => {
-
-  res.render('./pages/index.ejs');
+app.get('/',(req,res)=>{
+    res.render('./pages/index.js');
 })
+
+// app.get('/hello', (req, res) => {
+
+//   res.render('./pages/index.ejs');
+// })
 
 const books = [];
 
@@ -43,6 +46,7 @@ app.post('/search', (req, res) => {
   const url = `https://www.googleapis.com/books/v1/volumes?q=in${target}:${req.body.query}`;
   superagent.get(url)
     .then(data => {
+        console.log(data);
     const newBookList = getBookList(data.body.items);
 
     res.redirect('/show');
