@@ -23,9 +23,9 @@ app.get('/',(req,res)=>{
 
 const books = [];
 
-app.get('/show',(req,res)=>{
-    const ejsObject = {books: books};
-    res.render('./pages/searches/show.ejs',ejsObject);
+app.get('/show', (req, res) => {
+  const ejsObject = { books: books };
+  res.render('./pages/searches/show.ejs', ejsObject);
 })
 
 
@@ -46,30 +46,29 @@ app.post('/search', (req, res) => {
   const url = `https://www.googleapis.com/books/v1/volumes?q=in${target}:${req.body.query}`;
   superagent.get(url)
     .then(data => {
-        console.log(data);
-    const newBookList = getBookList(data.body.items);
+      const newBookList = getBookList(data.body.items);
 
-    res.redirect('/show');
-  })
-  .catch(error =>
-    console.log('something went wrong', error));
+      res.redirect('/show');
+    })
+    .catch(error =>
+      console.log('something went wrong', error));
 });
 
-function getBookList(bookInfo){
-  return bookInfo.map (book => {
+function getBookList(bookInfo) {
+  return bookInfo.map(book => {
     return new Book(
-        book.volumeInfo.title,
-        book.volumeInfo.authors,
-        book.volumeInfo.description,
-        book.volumeInfo.imageLinks )        
+      book.volumeInfo.title,
+      book.volumeInfo.authors,
+      book.volumeInfo.description,
+      book.volumeInfo.imageLinks)
   }
   );
 
 }
-function Book(title, authors, description, image){
+function Book(title, authors, description, image) {
   let dummyImage = "https://i.imgur.com/J5LVHEL.jpg";
   let hasImage = image === undefined;
-  let newImage = !hasImage ? image.thumbnail :dummyImage;
+  let newImage = !hasImage ? image.thumbnail : dummyImage;
   this.title = title,
   this.image = newImage;
   this.authors = authors,
@@ -77,12 +76,12 @@ function Book(title, authors, description, image){
   console.log(image);
   books.push(
     {
-        title:title,
-        image:newImage,
-        authors:authors,
-        description:description
+      title: title,
+      image: newImage,
+      authors: authors,
+      description: description
     });
-  
+
 }
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));

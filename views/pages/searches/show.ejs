@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/layout.css">
-    <link rel="stylesheet" href="styles/modules.css">
-    <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/modules.css">
+  <link rel="stylesheet" href="styles/reset.css">
   <title>Show</title>
 </head>
+
 <body>
-  <h1>This is the show page</h1>
-  <% books.forEach(book => { %>
-    <h2><%= book.title %></h2>
-    <img src="<%= book.image %>" alt="">
-    <h3><%= book.authors %></h3>
-    <p><%= book.description %></p>
-
-  <% }) %>
-
+  <nav>AVL Books</nav>
+  <div>
+    <h1>This is the show page</h1>
+    <% books.forEach(book=> { %>
+      <img src="<%= book.image %>" alt="">
+      <h2>
+        <%= book.title %>
+      </h2>
+      <h3>
+        <%= book.authors %>
+      </h3>
+      <p>
+        <%= book.description %>
+      </p>
+      <% }) %>
+  </div>
 </body>
+
 </html>
