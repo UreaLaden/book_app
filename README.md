@@ -19,7 +19,9 @@ In the terminal run the command `npm install` to install the required dependenci
 ### 6 hours
 ## Start Time
 ### 6pm EST
-###
+## Finish Time 1am EST
+## Actual Time Needed 7hrs.
+### After the initial formation we swapped out navigator and driver approximately every hour with Leaundrae pushing the commits.  
 
 
 ## Change Log
