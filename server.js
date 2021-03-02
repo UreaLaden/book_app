@@ -1,19 +1,11 @@
 'use strict'
 
 const express = require('express');
-<<<<<<< HEAD
 const PORT = 3001;
 const superagent = require('superagent');
 const app = express();
 
 require('dotenv').config();
-=======
-const app = express();
-require('dotenv').config();
-const superagent = require('superagent');
-
-const PORT = 3001;
->>>>>>> 2171ce4b38fdf123c8eb1a2c01547e459135d7b5
 
 app.use(express.static('./public'));
 app.use(express.urlencoded({extended: true}));
