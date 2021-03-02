@@ -1,0 +1,35 @@
+body{
+  height: 100%;
+}
+nav{
+  background-color: black;
+  color:black;
+  /* margin-bottom: 300px; */
+}
+
+ul{
+
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 50px; */
+}
+
+#search{
+  margin-top: 40px;
+  border: 1px solid black;
+}
+
+#title{
+  margin-top: 20px;
+}
+
+#Author{
+  margin-top: 20px
+}
+
+#submit{
+  margin-top: 20px;
+  margin-left: 50px;
+}
