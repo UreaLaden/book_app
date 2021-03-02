@@ -18,19 +18,12 @@ app.get('/hello', (req, res) => {
   res.render('./pages/index.ejs');
 })
 
-
-app.get('/bookData', (req, res) => {
-
-  const url = `https://www.googleapis.com/books/v1/volumes?q=inauthor:${req.query}`;
-
-  superagent.get(url)
-    .then(data => {
-      res.send(data.body)
-      console.log(data.body);
-    });
-});
 const books = [];
 
+app.get('/show',(req,res)=>{
+    const ejsObject = {books: books};
+    res.render('./pages/searches/show.ejs',ejsObject);
+})
 
 
 app.get('/new', (req, res) => {
@@ -48,28 +41,44 @@ app.post('/search', (req, res) => {
     break;
   }
   const url = `https://www.googleapis.com/books/v1/volumes?q=in${target}:${req.body.query}`;
-  console.log(url);
   superagent.get(url)
     .then(data => {
-      // const title = data.body.items[0].volumeInfo.title;
-      // const authors = data.body.items[0].volumeInfo.authors;
-      // const description = data.body.items[0].volumeInfo.description;
-      const newBookList = getBookList(data.body.items);
-      res.send(newBookList);
+    const newBookList = getBookList(data.body.items);
+
+    res.redirect('/show');
   })
   .catch(error =>
     console.log('something went wrong', error));
 });
+
 function getBookList(bookInfo){
   return bookInfo.map (book => {
-    return new Book(book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.description)
-  });
+    return new Book(
+        book.volumeInfo.title,
+        book.volumeInfo.authors,
+        book.volumeInfo.description,
+        book.volumeInfo.imageLinks )        
+  }
+  );
 
 }
-function Book(title, authors, description){
+function Book(title, authors, description, image){
+  let dummyImage = "https://i.imgur.com/J5LVHEL.jpg";
+  let hasImage = image === undefined;
+  let newImage = !hasImage ? image.thumbnail :dummyImage;
   this.title = title,
+  this.image = newImage;
   this.authors = authors,
   this.discription = description
+  console.log(image);
+  books.push(
+    {
+        title:title,
+        image:newImage,
+        authors:authors,
+        description:description
+    });
+  
 }
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));

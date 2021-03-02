@@ -11,6 +11,14 @@
   <title>Show</title>
 </head>
 <body>
-  <h1>Show</h1>
+  <h1>This is the show page</h1>
+  <% books.forEach(book => { %>
+    <h2><%= book.title %></h2>
+    <img src="<%= book.image %>" alt="">
+    <h3><%= book.authors %></h3>
+    <p><%= book.description %></p>
+
+  <% }) %>
+
 </body>
 </html>
