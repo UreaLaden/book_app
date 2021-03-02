@@ -23,5 +23,6 @@ app.get('/bookData', (req, res)=>
     {
       res.send(data.body)
     });
-  }
-app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`)
+});
+
+app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
