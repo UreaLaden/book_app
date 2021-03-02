@@ -37,17 +37,17 @@ app.post('/search', (req, res) => {
   let target = '';
   switch (req.body.selectionType) {
   case '1':
-    target = 'author';
-    break;
-  case '2':
     target = 'title';
+    break;
+    case '2':
+      target = 'author';
     break;
   }
   const url = `https://www.googleapis.com/books/v1/volumes?q=in${target}:${req.body.query}`;
   superagent.get(url)
     .then(data => {
       const newBookList = getBookList(data.body.items);
-
+      console.log(url);
       res.redirect('/show');
     })
     .catch(error =>
@@ -73,7 +73,6 @@ function Book(title, authors, description, image) {
   this.image = newImage;
   this.authors = authors,
   this.discription = description
-  console.log(image);
   books.push(
     {
       title: title,
