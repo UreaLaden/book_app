@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h1>This is the details page</h1>
+          <div id="entry">
+            <img class='center' src="<%= specificBook.image_url %>" alt="">
+            <h2>
+              <%= specificBook.title %>
+            </h2>
+            <h2>
+              <%= specificBook.authors %>
+            </h2>
+            <h4>
+              <%= specificBook.description %>
+            </h4>
+            
+          </div>
+      </div>
+</body>
+</html>

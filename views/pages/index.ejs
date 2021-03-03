@@ -22,6 +22,7 @@
     <p><%= book.description %></p>
     <p><%= book.isbn %></p>
     <img class='center' src="<%= book.image_url %>" alt="">
+    <a href="/books/<%= book.id %>">View More Details</a>
   <% }); %>
 </body>
 <footer>

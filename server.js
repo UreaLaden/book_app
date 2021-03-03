@@ -1,41 +1,50 @@
 'use strict'
 
-const express = require('express');
 require('dotenv').config();
-const PORT = process.env.PORT || 3001
+const express = require('express');
+const pg = require('pg');
 const superagent = require('superagent');
 const app = express();
-const pg = require('pg');
 
+const PORT = process.env.PORT || 3001
 const DATABASE_URL = process.env.DATABASE_URL;
 const client = new pg.Client(DATABASE_URL);
 client.on('error', error => console.log(error));
+
 app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
-
 app.set('view engine', 'ejs');
+
 
 app.get('/', getCurrentBooks);
 function getCurrentBooks(req, res) {
   const sqlString = 'SELECT * FROM books ;';
   const sqlArray = [];
   client.query(sqlString, sqlArray)
-    .then(result => {
-      console.log(result);
-      const ejsObject = {currentBooks: result.rows, totalBooks: result.rowCount};
-      res.render('./pages/index.ejs', ejsObject);
-    });
+  .then(result => {
+    console.log(result);
+    const ejsObject = {currentBooks: result.rows, totalBooks: result.rowCount};
+    res.render('./pages/index.ejs', ejsObject);
+  });
 }
-// app.get('/hello', (req, res) => {
 
-//   res.render('./pages/index.ejs');
-// })
+app.get('/books/:id',getSpecificBook);
+function getSpecificBook(req,res){
+  console.log('params id',req.params.id);
+  const sqlString = 'SELECT * FROM books WHERE id=$1;';
+  const sqlArr = [req.params.id];
+  client.query(sqlString,sqlArr)
+  .then((result)=>{
+    const ejsObject = {specificBook:result.rows[0]};
+    res.render('./pages/books/detail.ejs',ejsObject);
+  })
+}
 
 const books = [];
 
 app.get('/show', (req, res) => {
   const ejsObject = { books: books };
-  res.render('./pages/searches/show.ejs', ejsObject);
+  res.render('./pages/books/show.ejs', ejsObject);
 })
 
 
@@ -52,7 +61,7 @@ app.post('/search', (req, res) => {
       console.log(url);
       // res.redirect('/show');
       const ejsObject = { books: newBookList};
-      res.render('./pages/searches/show.ejs', ejsObject);
+      res.render('./pages/books/show.ejs', ejsObject);
     })
     .catch(error =>
       res.render('./pages/searches/error.ejs', error));
