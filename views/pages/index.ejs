@@ -8,24 +8,41 @@
   <title>Book APP</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/styles/reset.css">
   <link rel="stylesheet" href="/styles/base.css">
   <link rel="stylesheet" href="/styles/layout.css">
   <link rel="stylesheet" href="/styles/modules.css">
-  <link rel="stylesheet" href="/styles/reset.css">
 </head>
 
+
 <body>
-  <h1>Home Page</h1>
-  <% currentBooks.forEach(book =>{ %>
-    <h2><%= book.title %></h2>
-    <h2><%= book.author %></h2>
-    <p><%= book.description %></p>
-    <p><%= book.isbn %></p>
-    <img class='center' src="<%= book.image_url %>" alt="">
-    <a href="/books/<%= book.id %>">View More Details</a>
-  <% }); %>
+  <nav>
+    <h1>Home Page</h1>
+  </nav>
+  <div>
+    <% currentBooks.forEach(book=>{ %>
+      <h2>
+        <%= book.title %>
+      </h2>
+      <h2>
+        <%= book.author %>
+      </h2>
+      <h4>
+        <%= book.description %>
+      </h4>
+      <h4>
+        <%= book.isbn %>
+      </h4>
+      <img class='center' src="<%= book.image_url %>" alt="">
+      <a href="/books/<%= book.id %>">View More Details</a>
+      <% }); %>
+  </div>
 </body>
 <footer>
-  <h2>Total Books:<%= totalBooks %></h2>
+  <div>
+    <h2>Total Books:<%= totalBooks %>
+    </h2>
+  </div>
 </footer>
+
 </html>
