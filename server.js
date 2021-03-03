@@ -2,7 +2,7 @@
 
 const express = require('express');
 require('dotenv').config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001
 const superagent = require('superagent');
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.get('/',(req,res)=>{
-    res.render('./pages/index.js');
+  res.render('./pages/index.js');
 })
 
 // app.get('/hello', (req, res) => {
@@ -29,29 +29,23 @@ app.get('/show', (req, res) => {
 })
 
 
-app.get('/new', (req, res) => {
+app.get('/pages/searches/new', (req, res) => {
   res.render('./pages/searches/new.ejs');
 });
 
 app.post('/search', (req, res) => {
-  let target = '';
-  switch (req.body.selectionType) {
-  case '1':
-    target = 'title';
-    break;
-    case '2':
-      target = 'author';
-    break;
-  }
-  const url = `https://www.googleapis.com/books/v1/volumes?q=in${target}:${req.body.query}`;
+  const url = `https://www.googleapis.com/books/v1/volumes?q=in${req.body.selectionType}:${req.body.query}`;
   superagent.get(url)
     .then(data => {
+
       const newBookList = getBookList(data.body.items);
       console.log(url);
-      res.redirect('/show');
+      // res.redirect('/show');
+      const ejsObject = { books: newBookList};
+      res.render('./pages/searches/show.ejs', ejsObject);
     })
     .catch(error =>
-      console.log('something went wrong', error));
+      res.render('./pages/searches/error.ejs', error));
 });
 
 function getBookList(bookInfo) {
@@ -66,21 +60,12 @@ function getBookList(bookInfo) {
 
 }
 function Book(title, authors, description, image) {
-  let dummyImage = "https://i.imgur.com/J5LVHEL.jpg";
-  let hasImage = image === undefined;
-  let newImage = !hasImage ? image.thumbnail : dummyImage;
+  let dummyImage = 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = title,
-  this.image = newImage;
+  this.image = image = image !== undefined ? image.thumbnail : dummyImage,
   this.authors = authors,
-  this.discription = description
-  books.push(
-    {
-      title: title,
-      image: newImage,
-      authors: authors,
-      description: description
-    });
+  this.description = description
 
 }
 
-app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
+app.listen(PORT, () => {console.log(`Listening on http://localhost:${PORT}`);});
