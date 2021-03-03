@@ -5,13 +5,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/reset.css">
   <link rel="stylesheet" href="/styles/base.css">
   <link rel="stylesheet" href="/styles/layout.css">
   <link rel="stylesheet" href="/styles/modules.css">
-  <link rel="stylesheet" href="/styles/reset.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Antic+Didone&display=swap" rel="stylesheet">
-  <title>Show</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oi&display=swap" rel="stylesheet">
+  
 </head>
 
 <body>
@@ -20,13 +19,17 @@
     <h1>This is the show page</h1>
     <% books.forEach(book=> { %>
       <div id="entry">
+        <br>
         <img class='center' src="<%= book.image %>" alt="">
+        <br>
         <h2>
           <%= book.title %>
         </h2>
+        <br>
         <h2>
           <%= book.authors %>
         </h2>
+        <br>
         <h4>
           <%= book.description %>
         </h4>
