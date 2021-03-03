@@ -7,7 +7,10 @@
 A full-stack application for a book list which will include the ability to search the Google Books API
 
 ## Getting Started
-In the terminal run the command `npm install` to install the required dependencies
+
+- In the terminal run the command `npm install` to install the required dependencies.
+- From the terminal run the command `nodemon` or `node server.js` to launch the local server
+- The application will be available from any browser at https://localhost:3001
 
 ## Architecture
 
@@ -49,6 +52,7 @@ In the terminal run the command `npm install` to install the required dependenci
 
 ## Credits and Collaborations
  
+ - [Leaundrae Mckinney](https://github.com/UreaLaden)
  - [Andy Agulue](https://github.com/AndyAgulue)
  - [Victor Sullivan](https://github.com/VictorSully79)
 
