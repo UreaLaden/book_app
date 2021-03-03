@@ -35,6 +35,7 @@ function getSpecificBook(req,res){
   const sqlArr = [req.params.id];
   client.query(sqlString,sqlArr)
   .then((result)=>{
+    console.log(result.rows[0]);
     const ejsObject = {specificBook:result.rows[0]};
     res.render('./pages/books/detail.ejs',ejsObject);
   })
@@ -42,7 +43,7 @@ function getSpecificBook(req,res){
 
 const books = [];
 
-app.get('/show', (req, res) => {
+app.get('/pages/books/show', (req, res) => {
   const ejsObject = { books: books };
   res.render('./pages/books/show.ejs', ejsObject);
 })
@@ -60,6 +61,7 @@ app.post('/search', (req, res) => {
       const newBookList = getBookList(data.body.items);
       console.log(url);
       // res.redirect('/show');
+      console.log(data.body.items);
       const ejsObject = { books: newBookList};
       res.render('./pages/books/show.ejs', ejsObject);
     })
