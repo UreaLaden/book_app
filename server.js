@@ -72,7 +72,9 @@ function getSpecificBook(req,res){
     res.render('./pages/books/detail.ejs',ejsObject);
   })
 }
+//#endregion
 
+//#region Constructor Functions
 function getBookList(bookInfo) {
   return bookInfo.map(book => {
     return new Book(
@@ -91,6 +93,8 @@ function Book(title, authors, description, image) {
   this.authors = authors,
   this.description = description
 }
+
+//#endregion
 client.connect().then(() => {
   app.listen(PORT, () => {console.log(`Listening on http://localhost:${PORT}`);});
 
