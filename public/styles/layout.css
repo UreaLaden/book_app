@@ -1,30 +1,31 @@
+/* new page styling */
+/* @import url(//fonts.googleapis.com/css2?family=Antic+Didone); */
+
 body{
   height: 100%;
   width: 100%;
+
 }
 
 
-h1{
+nav{
   background-color: black;
-  color:black;
-  font-family: 'Antic Didone', serif;
+  color:blanchedalmond;
+  font-family: "Oi", serif;
 }
 
 ul{
 
   list-style: none;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-input{
+/* input{
   width:100%;
-}
+} */
 
-form{
-
-  width:80%;
-}
 
 #search{
   margin-top: 130px;
@@ -40,23 +41,28 @@ form{
 }
 
 #submit{
-  /* margin-top: 20px; */
-  margin: 2% 10% 2% 10% ;
+  margin-top: 20px;
+  /* margin: 2% 10% 2% 10% ; */
 }
-
+/* show page */
 div{
   margin:auto;
   justify-content: center;
-  /* flex-direction: column; */
   text-align: center;
+  border: 8px solid black;
 }
 
 #entry{
   align-items: center;
+  border: 8px solid black;
+  margin-left: 80px;
+  margin-right: 80px;
 }
 
+
 img{
-  height: 80%;
+  height: 80px;
+  width: 50px;
   margin-top: 40px;
   align-items: center;
 }
@@ -72,4 +78,8 @@ p{
   margin-left: auto;
   margin-right: auto;
   margin-top: 50px;
+}
+
+h2{
+  font-family: "Oi", serif;
 }

@@ -1,7 +1,9 @@
+/* @import url(//fonts.googleapis.com/css2?family=Antic+Didone); */
+
 *{
   box-sizing: border-box;
 }
 
-* {
-  background-image: linear-gradient(to right top, #c0a67f, #ceb38d, #ddc09b, #ebcda9, #fadbb7);
+body {
+  background-color: rgb(229, 202, 160);
 }
