@@ -10,6 +10,10 @@ h1{
   font-family: 'Antic Didone', serif;
 }
 
+h2{
+  height:5%;
+}
+
 ul{
 
   list-style: none;
