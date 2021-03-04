@@ -26,16 +26,34 @@ app.get('/pages/books/show', showBooks);
 app.get('/pages/searches/new', queryNewBooks);
 app.post('/search', findBooks);
 app.post('/books', addBooks);
-// app.put('/books/:id', updateDetails);
+app.put('/books/:id', updateBooks);
 app.delete('/books/:id', deleteBook);
 
 
 //#region Route Functions
-// function updateDetails(req, res){
-//   const sqlString = ''
-// }
+function updateBooks(req, res){
+  const {title, author, isbn, image_url, description, summary} = req.body;
+  const {id} = req.params;
+  const sqlArr = [
+    id,title, description, author, isbn, image_url,summary ];
+  const SQL = `UPDATE books WHERE id=$1,
+  SET title=$2 ,
+  description=$3,
+  author=$4,
+  isbn=$5,
+  image_url=$6
+  summary=$7`;
+  
+  client.query(SQL,sqlArr)
+  .then(()=>{
+    res.redirect(`/books/${id}`);
+  })
+}
 
 function deleteBook(req, res){
+  // console.log('query', req.query)
+  // console.log('body',req.body)
+  // console.log('params',req.params)
   const sqlString = `DELETE FROM books WHERE id=$1;`;
   const sqlArray = [req.params.id];
   client.query(sqlString, sqlArray)
@@ -150,5 +168,5 @@ function Book(title, authors, description, image, isbn, summary) {
 
 //#endregion
 client.connect().then(() => {
-  app.listen(PORT, () => { console.log(`Listening on http://localhost:${PORT}`); });
+  app.listen(PORT, () =>  console.log(`Listening on http://localhost:${PORT}`) );
 });
