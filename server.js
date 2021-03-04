@@ -40,25 +40,26 @@ function deleteBook(req, res){
   const sqlArray = [req.params.id];
   client.query(sqlString, sqlArray)
     .then(()=> {  
-      console.log('deletedBook');
+      console.log('deleted book');
       res.redirect('/');
     })
     .catch(error => handleError(error, res)); 
 }
 
 function addBooks(req, res) {
-  const sqlString = 'INSERT INTO books(author,title,isbn,image_url,description) VALUES($1,$2,$3,$4,$5) RETURNING id;';
+  const sqlString = 'INSERT INTO books(author,title,isbn,image_url,description,summary) VALUES($1,$2,$3,$4,$5,$6) RETURNING id;';
   const sqlArray =
     [
       req.body.author,
       req.body.title,
       req.body.isbn,
       req.body.image,
-      req.body.description
+      req.body.description,
+      req.body.summary
     ];
+    console.log(sqlArray);
   client.query(sqlString, sqlArray)
     .then((result) => {
-      console.log(result);
       console.log(`Stored ${req.body.title} into database`);
       res.redirect(`/books/${result.rows[0].id}`);
     })
@@ -69,10 +70,7 @@ function findBooks(req, res) {
   const url = `https://www.googleapis.com/books/v1/volumes?q=in${req.body.selectionType}:${req.body.query}`;
   superagent.get(url)
     .then(data => {
-      console.log(url);
       const newBookList = getBookList(data.body.items);
-      console.log(newBookList);
-
       const ejsObject = { books: newBookList };
       res.render('./pages/searches/show.ejs', ejsObject);
     })
@@ -101,12 +99,10 @@ function getCurrentBooks(req, res) {
 }
 
 function getSpecificBook(req, res) {
-  console.log('params id', req.params.id);
   const sqlString = 'SELECT * FROM books WHERE id=$1;';
   const sqlArr = [req.params.id];
   client.query(sqlString, sqlArr)
     .then((result) => {
-      console.log(result.rows[0]);
       const ejsObject = { specificBook: result.rows[0] };
       res.render('./pages/books/detail.ejs', ejsObject);
     })
@@ -121,30 +117,33 @@ function handleError(error, res) {
 
 //#region Constructor Functions
 function getBookList(bookInfo) {
-  // console.log(bookInfo..industryIdentifiers);
+  //How to check for null results
   return bookInfo.map(book => {
     let newISBN = book.volumeInfo.industryIdentifiers ?
       book.volumeInfo.industryIdentifiers[0].type + "-" + book.volumeInfo.industryIdentifiers[0].identifier :
       'No ISBN';
+    let summary = book.searchInfo ? book.searchInfo.textSnippet :
+    (book.volumeInfo.description ? book.volumeInfo.description.substring(0,50)+"..." : "No description available" );
     return new Book(
       book.volumeInfo.title,
       book.volumeInfo.authors,
       book.volumeInfo.description,
       book.volumeInfo.imageLinks,
-      newISBN
+      newISBN,
+      summary,
     )
   });
 
-
 }
 
-function Book(title, authors, description, image, isbn) {
+function Book(title, authors, description, image, isbn, summary) {
   let dummyImage = 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = title,
     this.image = image = image !== undefined ? image.thumbnail : dummyImage,
     this.authors = authors,
     this.description = description,
     this.isbn = isbn;
+    this.summary = summary;
 }
 
 //#endregion

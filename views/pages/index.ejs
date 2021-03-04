@@ -3,18 +3,10 @@
 <body>
   <div>
     <% currentBooks.forEach(book=>{ %>
-      <h2>
-        <%= book.title %>
-      </h2>
-      <h2>
-        <%= book.author %>
-      </h2>
-      <h4>
-        <%= book.description %>
-      </h4>
-      <h4>
-        <%= book.isbn %>
-      </h4>
+      <h2> <%= book.title %> </h2>
+      <h2> <%= book.author %> </h2>
+      <h4> <%= book.summary %> </h4>
+      <h4><%= book.isbn %></h4>
       <img class='center' src="<%= book.image_url %>" alt="">
       <a href="/books/<%= book.id %>">View More Details</a>
       <% }); %>

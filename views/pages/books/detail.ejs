@@ -6,48 +6,22 @@
     </h1>
     <ul>
       <li><a href="/">Home</a></li>
-      <li><a href="/pages/books/show"> Results Page</a></li>
+      <li><a href="/pages/books/show"> Results</a></li>
     </ul>
     <div>
-      <div id="entry">
-        <img class='center' src="<%= specificBook.image_url %>" alt="">
-        <h2>
-          <%= specificBook.title %>
-        </h2>
-        <h2>
-          <%= specificBook.authors %>
-        </h2>
-        <h4>
-          <%= specificBook.description %>
-        </h4>
-        <h4>
-          <%= specificBook.isbn %>
-        </h4>
-        <h4>
-          Bookshelf: Genre
-        </h4>
-        <!-- <form action="">
-          <input name="title" value= "<%= specificBook.title %>" >
-          
-          
-          <input name="author" value= "<%= specificBook.authors %>">
+      <div id="entry">        
+        <img class='center' src="<%= specificBook.image_url %>" alt="">        
+        <h2><%= specificBook.title %></h2>
+        <h2><%= specificBook.authors %> </h2>
+        <h4><%= specificBook.description %></h4>
+        <h4><%= specificBook.isbn %></h4>
         
-            
-          <input name="description" value=  "<%= specificBook.description %>" >
-           
-          
-          <input name="isbn" value= "<%= specificBook.isbn %>" >
-            
-          
-          <button>
-                    Update Details
-          </button>
+        <h4>Bookshelf: Genre</h4>
+          <button>Update Details</button>
         </form>
         <form action="/books/<%= specificBook.id %>?_method=DELETE" method="post">
-          <button type="submit">
-            Delete Book
-          </button>
-        </form> -->
+          <button type="submit">Delete Book</button>
+        </form>
       </div>
     </div>
 

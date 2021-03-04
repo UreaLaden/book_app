@@ -5,32 +5,23 @@
   <div>
     <h1>This is the show page</h1>
     <% books.forEach(book=> { %>
-      <div id="entry">
+      <div >
         <br>
         <img class='center' src="<%= book.image %>" alt="">
         <br>
-        <h2>
-          <%= book.title %>
-        </h2>
+        <h2><%= book.title %></h2>
         <br>
-        <h2>
-          <%= book.authors %>
-        </h2>
+        <h2><%= book.authors %></h2>
         <br>
-        <h4>
-          <%= book.description %>
-        </h4>
+        <h4> <%= book.summary %> </h4>
         <form action="/books" method="POST">
-          <div>
-            <input type="hidden" name="title" value="<%= book.title %>">
-            <input type="hidden" name="author" value="<%= book.authors %>">
-            <input type="hidden" name="description" value="<%= book.description %>">
-            <input type="hidden" name="image" value="<%= book.image %>">
-            <input type="hidden" name="isbn" value="<%= book.isbn %>">
-            <input type="hidden" name="genre"  value="">
-            <input type="hidden" name="summary"  value="">
-          </div>
-        <%- include ('../layout/edit') %>
+          <input hidden type="text" name="author" value="<%= book.authors %>">
+          <input hidden type="text" name="title" value="<%= book.title %>">
+          <input hidden type="text" name="image" value="<%= book.image %>">
+          <input hidden type="text" name="description" value="<%= book.description %>">
+          <input hidden type="text" name="isbn" value="<%= book.isbn %>">
+          <input hidden type="text" name="genre" value="">
+          <input hidden type="text" name="summary" value="<%= book.summary%>">
         <input type="submit" value="Save to Database">
         </form>
       </div>
