@@ -1,0 +1,21 @@
+footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+nav{
+  background-color: black;
+  color:blanchedalmond;
+  font-family: "Oi", serif;
+  height: fit-content;
+}
+
+a{
+  margin-left: 200px;
+  display: inline;
+  color:blanchedalmond
+}
+
+.topleft{
+  justify-content: left;
+}

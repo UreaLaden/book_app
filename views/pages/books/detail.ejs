@@ -1,32 +1,32 @@
 <%- include('../layout/header') %>
 
   <body>
-    <h1>
-      <%= specificBook.title %>
-    </h1>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/pages/books/show"> Results Page</a></li>
-    </ul>
-    <div>
-      <div id="entry">
-        <img class='center' src="<%= specificBook.image_url %>" alt="">
-        <h2>
-          <%= specificBook.title %>
-        </h2>
-        <h2>
-          <%= specificBook.authors %>
-        </h2>
-        <h4>
-          <%= specificBook.description %>
-        </h4>
-        <h4>
-          <%= specificBook.isbn %>
-        </h4>
-        <h4>
-          Bookshelf: Genre
-        </h4>
-        <!-- <form action="">
+    <div id="entry">
+      <!-- <h1>
+        <%= specificBook.title %>
+      </h1> -->
+      <ul>
+        <li><a href="/pages/books/show"> Results Page</a></li>
+      </ul>
+
+
+      <img class='center' src="<%= specificBook.image_url %>" alt="">
+      <h2>
+        <%= specificBook.title %>
+      </h2>
+      <h2>
+        <%= specificBook.authors %>
+      </h2>
+      <h4>
+        <%= specificBook.description %>
+      </h4>
+      <h4>
+        <%= specificBook.isbn %>
+      </h4>
+      <h4>
+        Bookshelf: Genre
+      </h4>
+      <!-- <form action="">
           <input name="title" value= "<%= specificBook.title %>" >
           
           
@@ -48,8 +48,8 @@
             Delete Book
           </button>
         </form> -->
-      </div>
     </div>
+
 
   </body>
   <%- include ('../layout/footer') %>

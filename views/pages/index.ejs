@@ -3,6 +3,7 @@
 <body>
   <div>
     <% currentBooks.forEach(book=>{ %>
+      <img class='center' src="<%= book.image_url %>" alt="">
       <h2>
         <%= book.title %>
       </h2>
@@ -15,16 +16,12 @@
       <h4>
         <%= book.isbn %>
       </h4>
-      <img class='center' src="<%= book.image_url %>" alt="">
       <a href="/books/<%= book.id %>">View More Details</a>
       <% }); %>
+      
   </div>
-</body>
-<footer>
-  <div>
-    <h2>Total Books:<%= totalBooks %>
+  <h2>Total Books:<%= totalBooks %>
     </h2>
-  </div>
-</footer>
+</body>
 
-</html>
+
