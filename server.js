@@ -36,14 +36,15 @@ function updateBooks(req, res){
   const {id} = req.params;
   const sqlArr = [
     id,title, description, author, isbn, image_url,summary ];
-  const SQL = `UPDATE books WHERE id=$1,
+  const SQL = `UPDATE books 
   SET title=$2 ,
   description=$3,
   author=$4,
   isbn=$5,
-  image_url=$6
-  summary=$7`;
-  
+  image_url=$6,
+  summary=$7
+  WHERE id=$1;`;
+
   client.query(SQL,sqlArr)
   .then(()=>{
     res.redirect(`/books/${id}`);
