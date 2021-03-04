@@ -23,43 +23,68 @@ app.get('/books/:id',getSpecificBook);
 app.get('/pages/books/show', showBooks);
 app.get('/pages/searches/new', queryNewBooks);
 app.post('/search', findBooks);
-
+app.post('/books',addBooks);
 
 
 //#region Route Functions
+
+function addBooks(req,res){
+  const sqlString = 'INSERT INTO books(author,title,isbn,image_url,description) VALUES($1,$2,$3,$4,$5) RETURNING id;';
+  const sqlArray = 
+  [
+    req.body.author,
+    req.body.title,
+    req.body.isbn,
+    req.body.image,
+    req.body.description
+  ];
+  client.query(sqlString,sqlArray)
+  .then((result) =>
+  {
+    console.log(result);
+     console.log(`Stored ${req.body.title} into database`);
+     res.redirect(`/books/${result.rows[0].id}`);
+  })
+  .catch(error => handleError(error,res));  
+}
 
 function findBooks(req,res){
   const url = `https://www.googleapis.com/books/v1/volumes?q=in${req.body.selectionType}:${req.body.query}`;
   superagent.get(url)
     .then(data => {
-
-      const newBookList = getBookList(data.body.items);
       console.log(url);
-      // res.redirect('/show');
-      console.log(data.body.items);
+      const newBookList = getBookList(data.body.items);
+      console.log(newBookList);
+       
       const ejsObject = { books: newBookList};
-      res.render('./pages/books/show.ejs', ejsObject);
+      res.render('./pages/searches/show.ejs', ejsObject);
     })
-    .catch(error =>
-      res.render('./pages/searches/error.ejs', error));
+    .catch(error => handleError(error,res));
 }
 
-function showBooks(req,res){
+const books = [];
+function showBooks(req,res)
+{
   const ejsObject = { books: books };
-  res.render('./pages/books/show.ejs', ejsObject);}
+  res.render('./pages/books/show.ejs', ejsObject);
+}
 
-function queryNewBooks(req,res){
-  res.render('./pages/searches/new.ejs');}
+function queryNewBooks(req,res)
+{
+  res.render('./pages/searches/new.ejs');
+}
 
-function getCurrentBooks(req, res) {
+function getCurrentBooks(req, res) 
+{
   const sqlString = 'SELECT * FROM books ;';
   const sqlArray = [];
   client.query(sqlString, sqlArray)
   .then(result => {
-    console.log(result);
     const ejsObject = {currentBooks: result.rows, totalBooks: result.rowCount};
     res.render('./pages/index.ejs', ejsObject);
-  });}
+  })
+    .catch(error => handleError(error,res));
+}
 
 function getSpecificBook(req,res){
   console.log('params id',req.params.id);
@@ -71,31 +96,44 @@ function getSpecificBook(req,res){
     const ejsObject = {specificBook:result.rows[0]};
     res.render('./pages/books/detail.ejs',ejsObject);
   })
+  .catch(error => handleError(error,res));
+}
+
+function handleError(error,res){
+  console.log(error);
+  res.render('./pages/error.ejs');
 }
 //#endregion
 
 //#region Constructor Functions
 function getBookList(bookInfo) {
+  // console.log(bookInfo..industryIdentifiers);
   return bookInfo.map(book => {
+    let newISBN = book.volumeInfo.industryIdentifiers ?
+    book.volumeInfo.industryIdentifiers[0].type +"-"+ book.volumeInfo.industryIdentifiers[0].identifier :
+    'No ISBN';
     return new Book(
       book.volumeInfo.title,
       book.volumeInfo.authors,
       book.volumeInfo.description,
-      book.volumeInfo.imageLinks)
-  }
-  );
+      book.volumeInfo.imageLinks, 
+      newISBN
+      )     
+    });
+
+      
 }
 
-function Book(title, authors, description, image) {
+function Book(title, authors, description, image, isbn) {
   let dummyImage = 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = title,
   this.image = image = image !== undefined ? image.thumbnail : dummyImage,
   this.authors = authors,
-  this.description = description
+  this.description = description,
+  this.isbn = isbn;
 }
 
 //#endregion
 client.connect().then(() => {
   app.listen(PORT, () => {console.log(`Listening on http://localhost:${PORT}`);});
-
 });

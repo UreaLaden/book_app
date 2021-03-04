@@ -14,9 +14,12 @@
 </head>
 
 <body>
- andy-working
-  <div>
-    <h1>This is the details page</h1>
+ <h1><%= specificBook.title %></h1>
+ <ul>
+   <li><a href="/">Home</a></li>
+   <li><a href="/pages/books/show"> Results Page</a></li>
+  </ul>
+   <div>
     <div id="entry">
       <img class='center' src="<%= specificBook.image_url %>" alt="">
       <h2>

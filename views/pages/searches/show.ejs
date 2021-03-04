@@ -32,7 +32,13 @@
         <h4>
           <%= book.description %>
         </h4>
-        <a href="pages/books/<%= book.id %>">View More Details</a>
+        <form action="/books" method="POST">
+        <input type="hidden" name="title" value="<%= book.title %>">
+        <input type="hidden" name="author" value ="<%= book.authors %>">
+        <input type="hidden" name="description" value="<%= book.description %>">
+        <input type="hidden" name="image" value="<%= book.image %>">
+        <input type="submit" value="Save to Database">
+        </form>
       </div>
       <% }) %>
   </div>

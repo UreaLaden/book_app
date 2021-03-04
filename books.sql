@@ -6,4 +6,4 @@ CREATE TABLE books(
   isbn VARCHAR(255),
   image_url TEXT,
   description TEXT
-)
+);
