@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/reset.css">
-  <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="/styles/layout.css">
-  <link rel="stylesheet" href="/styles/modules.css">
-  <link href="https://fonts.googleapis.com/css2?family=Oi&display=swap" rel="stylesheet">
-</head>
+<%- include('../layout/header') %>
 
 <body>
   <nav>AVL Books</nav>
@@ -33,10 +21,16 @@
           <%= book.description %>
         </h4>
         <form action="/books" method="POST">
-        <input type="hidden" name="title" value="<%= book.title %>">
-        <input type="hidden" name="author" value ="<%= book.authors %>">
-        <input type="hidden" name="description" value="<%= book.description %>">
-        <input type="hidden" name="image" value="<%= book.image %>">
+          <div>
+            <input type="hidden" name="title" value="<%= book.title %>">
+            <input type="hidden" name="author" value="<%= book.authors %>">
+            <input type="hidden" name="description" value="<%= book.description %>">
+            <input type="hidden" name="image" value="<%= book.image %>">
+            <input type="hidden" name="isbn" value="<%= book.isbn %>">
+            <input type="hidden" name="genre"  value="">
+            <input type="hidden" name="summary"  value="">
+          </div>
+        <%- include ('../layout/edit') %>
         <input type="submit" value="Save to Database">
         </form>
       </div>
@@ -44,4 +38,4 @@
   </div>
 </body>
 
-</html>
+<%- include ('../layout/footer') %>

@@ -1,40 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../layout/header') %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/reset.css">
-  <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="/styles/layout.css">
-  <link rel="stylesheet" href="/styles/modules.css">
-  <link href="https://fonts.googleapis.com/css2?family=Oi&display=swap" rel="stylesheet">
-  <title>Details</title>
-</head>
-
-<body>
- <h1><%= specificBook.title %></h1>
- <ul>
-   <li><a href="/">Home</a></li>
-   <li><a href="/pages/books/show"> Results Page</a></li>
-  </ul>
-   <div>
-    <div id="entry">
-      <img class='center' src="<%= specificBook.image_url %>" alt="">
-      <h2>
-        <%= specificBook.title %>
-      </h2>
-      <h2>
-        <%= specificBook.authors %>
-      </h2>
-      <h4>
-        <%= specificBook.description %>
-      </h4>
-
+  <body>
+    <h1>
+      <%= specificBook.title %>
+    </h1>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/pages/books/show"> Results Page</a></li>
+    </ul>
+    <div>
+      <div id="entry">
+        <img class='center' src="<%= specificBook.image_url %>" alt="">
+        <h2>
+          <%= specificBook.title %>
+        </h2>
+        <h2>
+          <%= specificBook.authors %>
+        </h2>
+        <h4>
+          <%= specificBook.description %>
+        </h4>
+        <h4>
+          <%= specificBook.isbn %>
+        </h4>
+        <h4>
+          Bookshelf: Genre
+        </h4>
+        <!-- <form action="">
+          <input name="title" value= "<%= specificBook.title %>" >
+          
+          
+          <input name="author" value= "<%= specificBook.authors %>">
+        
+            
+          <input name="description" value=  "<%= specificBook.description %>" >
+           
+          
+          <input name="isbn" value= "<%= specificBook.isbn %>" >
+            
+          
+          <button>
+                    Update Details
+          </button>
+        </form>
+        <form action="/books/<%= specificBook.id %>?_method=DELETE" method="post">
+          <button type="submit">
+            Delete Book
+          </button>
+        </form> -->
+      </div>
     </div>
-  </div>
 
-</body>
-
-</html>
+  </body>
+  <%- include ('../layout/footer') %>

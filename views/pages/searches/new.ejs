@@ -1,22 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../layout/header') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/reset.css">
-    <link rel="stylesheet" href="/styles/base.css">
-    <link rel="stylesheet" href="/styles/layout.css">
-    <link rel="stylesheet" href="/styles/modules.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oi&display=swap" >
-    
-    <title>Document</title>
-</head>
 
 <body>
     <nav>AVL Books</nav>
-    <a href="/">Home</a></li>
         <ul>
             <form action="/search" method="POST">
                 <li id="search"><input type="text" placeholder="Enter a Title or Author" name="query"></li>
@@ -27,4 +13,4 @@
         </ul>    
 </body>
 
-</html>
+<%- include ('../layout/footer') %>
