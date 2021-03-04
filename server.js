@@ -48,7 +48,7 @@ function updateBooks(req, res){
   client.query(SQL,sqlArr)
   .then(()=>{
     res.redirect(`/books/${id}`);
-  })
+  }).catch(error => handleError(req));
 }
 
 function deleteBook(req, res){
