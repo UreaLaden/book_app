@@ -87,6 +87,7 @@ function queryNewBooks(req, res) {
   res.render('./pages/searches/new.ejs');
 }
 
+
 function getCurrentBooks(req, res) {
   const sqlString = 'SELECT * FROM books ;';
   const sqlArray = [];
@@ -135,6 +136,7 @@ function getBookList(bookInfo) {
   });
 
 }
+
 
 function Book(title, authors, description, image, isbn, summary) {
   let dummyImage = 'https://i.imgur.com/J5LVHEL.jpg';
