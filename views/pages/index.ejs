@@ -1,26 +1,6 @@
-<!DOCTYPE html>
-
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Book APP</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/styles/reset.css">
-  <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="/styles/layout.css">
-  <link rel="stylesheet" href="/styles/modules.css">
-</head>
+<%- include('./layout/header') %>
 
 <body>
-  <nav>
-    <h1>Home Page</h1>
-    <li>
-      <a href="/pages/searches/new">Search</a>
-    </li>
-  </nav>
   <div>
     <% currentBooks.forEach(book=>{ %>
       <h2>
